@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title id="page-title">Доступ обмежено</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f8;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+      padding: 2rem 2.5rem;
+      max-width: 440px;
+      text-align: center;
+      position: relative;
+    }
+
+    .card h1 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #d32f2f;
+    }
+
+    .card p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      color: #555;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: #1976d2;
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .btn:hover {
+      background: #1565c0;
+    }
+
+    .lang { display: none; }
+    .lang.active { display: block; }
+
+    .lang-switcher {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      font-size: 0.9rem;
+    }
+
+    .lang-switcher button {
+      background: none;
+      border: none;
+      color: #1976d2;
+      font-weight: bold;
+      cursor: pointer;
+      padding: 0 0.3rem;
+    }
+
+    .lang-switcher button:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="lang-switcher">
+      <button onclick="switchLang('uk')">UA</button> |
+      <button onclick="switchLang('en')">EN</button>
+      <span id="btn-ru">| <button onclick="switchLang('ru')">RU</button></span>
+    </div>
+
+    <!-- Ukrainian -->
+    <div class="lang lang-uk">
+      <h1>Доступ до Інтернету призупинено</h1>
+      <p>Точну причину обмеження Ви можете дізнатися в особистому кабінеті.</p>
+      <a class="btn" href="https://stat.nekkoy.pp.ua">Перейти до кабінету</a>
+    </div>
+
+    <!-- English -->
+    <div class="lang lang-en">
+      <h1>Internet access has been suspended</h1>
+      <p>You can check the reason for the restriction in your personal account.</p>
+      <a class="btn" href="https://stat.nekkoy.pp.ua">Go to personal account</a>
+    </div>
+
+    <!-- Russian -->
+    <div class="lang lang-ru">
+      <h1>Доступ к интернету приостановлен</h1>
+      <p>Точную причину ограничения Вы можете узнать в личном кабинете.</p>
+      <a class="btn" href="https://stat.nekkoy.pp.ua">Перейти в личный кабинет</a>
+    </div>
+  </div>
+
+  <script>
+    const ENABLE_RUSSIAN = true;    // Поставь false, чтобы скрыть русский
+    const DEFAULT_LANG = 'uk';      // Укажи язык по умолчанию: 'uk', 'en', 'ru'
+
+    const TITLES = {
+      uk: 'Доступ обмежено',
+      en: 'Access restricted',
+      ru: 'Доступ ограничен'
+    };
+
+    function setLanguage(lang) {
+      document.querySelectorAll('.lang').forEach(el => el.classList.remove('active'));
+      const el = document.querySelector(`.lang-${lang}`);
+      if (el) el.classList.add('active');
+      const title = TITLES[lang] || TITLES[DEFAULT_LANG];
+      document.title = title;
+      document.getElementById('page-title').textContent = title;
+    }
+
+    function switchLang(lang) {
+      localStorage.setItem('preferredLang', lang);
+      setLanguage(lang);
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      if (!ENABLE_RUSSIAN) {
+        document.querySelector(".lang-ru")?.remove();
+        document.getElementById("btn-ru")?.remove();
+      }
+
+      const savedLang = localStorage.getItem('preferredLang');
+      let lang = savedLang;
+
+      if (!lang || (lang === 'ru' && !ENABLE_RUSSIAN)) {
+        const browserLang = navigator.language || navigator.userLanguage;
+        if (browserLang.startsWith('ru') && ENABLE_RUSSIAN) lang = 'ru';
+        else if (browserLang.startsWith('en')) lang = 'en';
+        else lang = DEFAULT_LANG;
+      }
+
+      setLanguage(lang);
+    });
+  </script>
+</body>
+</html>
