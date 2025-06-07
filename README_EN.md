@@ -4,7 +4,7 @@
 
 # Captive Portal for Internet Service Providers
 
-**A simple implementation of a Captive Portal**, whose purpose is to display a placeholder page to clients with limited internet access.
+**A simple implementation of a Captive Portal**, whose purpose is to display a stub page to clients with limited internet access.
 
 <img src="https://raw.githubusercontent.com/Nekkoy/Captive-Portal/main/img_en.jpg" width="560" height="380">
 
