@@ -71,6 +71,12 @@ systemctl restart nginx
 cp -f ./unbound.conf /etc/unbound/
 ```
 
+Тепер потрібно замінити в конфізі IP адресу Captive Portal
+Для цього виконаємо команду замінивши IP `10.0.0.1` на IP свого Captive Portal
+```bash
+sed -i 's|192\.168\.1\.254|10.0.0.1|g' /etc/unbound/unbound.conf
+```
+
 Перезапустіть `Unbound`:
 ```bash
 systemctl restart unbound
