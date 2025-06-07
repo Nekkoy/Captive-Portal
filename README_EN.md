@@ -88,12 +88,6 @@ iptables -t nat -A POSTROUTING -p udp -d 192.168.1.254 --dport 53 -j SNAT --to-s
 iptables -t nat -A POSTROUTING -p tcp -d 192.168.1.254 --dport 53 -j SNAT --to-source 192.168.1.1
 ```
 
-#### c. SNAT for responses from local DNS
-```bash
-iptables -t nat -A POSTROUTING -p udp -s 192.168.1.254 --sport 53 -j SNAT --to-source 192.168.1.1
-iptables -t nat -A POSTROUTING -p tcp -s 192.168.1.254 --sport 53 -j SNAT --to-source 192.168.1.1
-```
-
 ## 🔒 Client restrictions
 For Captive Portal to work correctly, clients must be restricted as follows:
 
