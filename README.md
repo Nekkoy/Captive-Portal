@@ -65,7 +65,7 @@ cp -f ./nginx_captive_portal_redirect.conf /etc/nginx/conf.d/
 systemctl restart nginx
 ```
 
-### 3. Настройка unbound
+### 3. Налаштування unbound
 Скопіюйте конфігураційний файл:
 ```bash
 cp -f ./unbound.conf /etc/unbound/
