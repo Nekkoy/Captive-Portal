@@ -74,7 +74,7 @@ cp -f ./unbound.conf /etc/unbound/
 Теперь нужно заменить в конфиге IP адрес Captive Portal
 Для этого выполним команду заменив IP `10.0.0.1` на IP своего Captive Portal
 ```bash
-sed -i 's|192\.168\.1\.254|10.0.0.1|g' /etc/unbound/unbound.conf.d/caprive_portal.conf
+sed -i 's|192\.168\.1\.254|10.0.0.1|g' /etc/unbound/unbound.conf
 ```
 
 Перезапустите `Unbound`:
